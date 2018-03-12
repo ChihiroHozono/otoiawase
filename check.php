@@ -9,9 +9,9 @@
 	<?php
 
 
-	$nickname = $_POST['nickname'];
-	$email = $_POST['email'];
-	$content = $_POST['content'];
+	$nickname = htmlspecialchars($_POST['nickname']);
+	$email = htmlentities($_POST['email']);
+	$content = htmlspecialchars($_POST['content']);
 
 
 
@@ -19,12 +19,14 @@
 		echo "ニックネームが入力されていません";
 	}else{
 		echo "ようこそ".$nickname.'様';
+		echo "<br>";
 	}
 
 	if($email == ''){
 		echo 'メールアドレスが入力されていません。';
 	}else{
 		echo 'メールアドレス：'.$email;
+		echo "<br>";
 	}
 
 	if($content == ''){
