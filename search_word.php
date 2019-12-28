@@ -4,7 +4,7 @@ if (isset($_POST) && !empty($_POST['content'])) {
     $dbname = 'mysql:dbname=phpkiso;host=localhost';
     $user = 'root';
     $pw = '';
-    $db = new PDO($dsn, $user, $password);
+    $db = new PDO($dbname, $user, $pw);
     $db->query('SET NAMES utf8');
 
     // 2. クエリを実行
