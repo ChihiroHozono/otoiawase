@@ -6,19 +6,17 @@
 </head>
 <body>
 	<h1>お問い合わせ情報入力</h1>
-	<form method="POST" action="check.php">
-		<div>
-			ニックネーム<br>
-			<input type="text" name="nickname" style="width:100px">
-		</div>
-		<div>
-			メールアドレス<br>
-			<input type="text" name="email" style="width:200px">
-		</div>
-		<div>
-			お問い合わせ内容<br>
-			<textarea name="content" cols="40" rows="5"></textarea>
-		</div>
+	<form method="POST" action="./check.php">
+		
+		<p>ニックネーム</p>
+		<input type="text" name="nickname" style="width:100px">
+
+		<p>メールアドレス</p>
+		<input type="text" name="email" style="width:200px">
+		
+		<p>	お問い合わせ内容</p>
+		<textarea name="contents" cols="40" rows="5"></textarea>
+		
 		<input type="submit" name="送信">
 	</form>
 </body>
