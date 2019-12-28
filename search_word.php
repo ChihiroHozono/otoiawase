@@ -1,32 +1,26 @@
-
-<!-- ここからPHPコードを記述する -->
 <?php
-//POST送信が行われたらDB接続し、データを取得
-if(isset($_POST) && !empty($_POST['content'])){
-  // １．データベースに接続する
-  $dsn = 'mysql:dbname=phpkiso;host=localhost';
-  $user = 'root';
-  $password = '';
-  $dbh = new PDO($dsn, $user, $password);
-  $dbh->query('SET NAMES utf8');
-  // ２．SQL文を実行する
-  $word = $_POST['content'];
-  $sql = "SELECT * FROM `survey` WHERE `content` LIKE '%{$word}%'";
+if (isset($_POST) && !empty($_POST['content'])) {
+    // 1. データベースに接続
+    $dbname = 'mysql:dbname=phpkiso;host=localhost';
+    $user = 'root';
+    $pw = '';
+    $db = new PDO($dsn, $user, $password);
+    $db->query('SET NAMES utf8');
 
-  // SQLを実行
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute();
-  $line = array();
-  // データを取得する
-  while (1) {
-    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($rec == false) {
-      break;
+    // 2. クエリを実行
+    $word = $_POST['content'];
+    $sql = "SELECT * FROM `survey` WHERE `content` LIKE '%{$word}%'";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute();
+    $line = array();
+    while (1) {
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($rec == false) break;
+        $line[] = $rec;
     }
-    $line[] = $rec;
-  }
-  // ３．データベースを切断する
-  $dbh = null;
+
+    // 3. データベースを切断
+    $dbh = null;
 }
 ?>
 
@@ -38,22 +32,20 @@ if(isset($_POST) && !empty($_POST['content'])){
 </head>
 <body>
   <form action="" method="post">
-  <p>検索したいワードを入力してください。</p>
+  <p>ワードを入力してください。</p>
   <input type="text" name="content">
   <input type="submit" value="検索">
 </form>
 <?php
-if(isset($line)){
-   foreach ($line as $v) {
-  // echo $v;
-   echo "<hr>";
-   echo $v["id"]."<br>";
-   echo $v["cickname"]."<br>";
-   echo $v["email"]."<br>";
-   echo $v["content"]."<br>";
-  }
-  echo "<hr>";
+if (isset($line)) {
+    foreach ($values as $value) {
+        echo "<hr>";
+        echo $value["id"]."<br>";
+        echo $value["cickname"]."<br>";
+        echo $value["email"]."<br>";
+        echo $value["content"]."<br>";   
+    }
 }
- ?>
+?>
 </body>
 </html>
